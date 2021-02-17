@@ -15,16 +15,24 @@ const initialState = {
         { id: 3, name: 'Premium sound system', price: 500 },
         { id: 4, name: 'Rear spoiler', price: 250 }
       ]
-}
+};
 
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case ADD_FEATURE:
-            return {
+            // state.car.features.contains(action.payload.feature) ? 
+            // state 
+            // : 
+            if(state.car.features.includes(action.payload.feature)){
+              return state;
+            } else{
+              return {
                 ...state,
                 additionalPrice: (state.additionalPrice + action.payload.price),
                 car: {...state.car, features: [...state.car.features, action.payload.feature]},
+              }
             };
+            
         case REMOVE_FEATURE:
             return {
                 ...state,
@@ -39,6 +47,6 @@ const reducer = (state = initialState, action) => {
         default:
             return state;
     }
-};
+  }
 
 export default reducer;
